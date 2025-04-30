@@ -1,6 +1,7 @@
+import Image from 'next/image'
 import React from 'react'
 
-const HeroSection = () => {
+const HeroSection = ({ bannerImage }) => {
     return (
         <div className="relative w-full h-max flex flex-col items-center">
             <div className="relative w-full bg-slate-400">
@@ -11,23 +12,22 @@ const HeroSection = () => {
                 </div>
             </div>
             <div className="w-full h-[20vh] md:h-[70vh]">
-                {/* {bannerImage ? (
-            <>
-              <LazyImage
-                width="100%"
-                height="100%"
-                objectFit="cover"
-                src={bannerImage || defaultImage}
-                placeholderSrc={bannerImage || defaultImage}
-                alt="banner"
-                imgClassname=" md:object-center"
-              />
-            </>
-          ) : (
-            <>
-              <div className="w-full animate-pulse h-full bg-slate-500"></div>
-            </>
-          )} */}
+                {bannerImage ? (
+                    <>
+                        <Image
+                            priority
+                            fill
+                            src={bannerImage}
+                            alt="images of our services"
+                            sizes="100vw"
+                            className="object-cover"
+                        />
+                    </>
+                ) : (
+                    <>
+                        <div className="w-full animate-pulse h-full bg-slate-500"></div>
+                    </>
+                )}
             </div>
             <div className="block md:hidden w-full">
                 {/* <QuoteCard /> */}
