@@ -3,6 +3,8 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import page from "./about/page";
 import HeroSection from "@/components/HeroSection";
+import DownloadApp from "@/components/sections/DownloadApp";
+import WhyChooseUs from "@/components/sections/WhyChooseUs";
 
 
 async function getData() {
@@ -21,13 +23,15 @@ async function getData() {
 export default async function Home() {
   const { pageData, servicesData, siteInfo } = await getData();
 
-  console.log(pageData)
 
 
 
   return (
     <div>
       <HeroSection bannerImage={pageData?.data?.image_1_link} />
+      <DownloadApp productInfo={siteInfo} />
+      <WhyChooseUs imageLink={pageData?.data?.image_2_link}
+        content={pageData?.data?.text_2} />
 
 
     </div>

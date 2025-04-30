@@ -4,7 +4,7 @@ import "./globals.css";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { QueryClientProvider } from "@/providers/QueryClientProvider";
+import { QueryClientProvider } from "@/context/QueryClientProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,11 +29,17 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
+  const primaryColor = process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#EC6408";
+
+
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
   return (
     <html lang={locale}>
+      <head>
+        <style>{`:root { --primary-color: ${primaryColor}; }`}</style>
+      </head>
       <body suppressHydrationWarning>
         <NextIntlClientProvider locale={locale}>
           <QueryClientProvider>{children}</QueryClientProvider>

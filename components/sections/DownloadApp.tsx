@@ -1,17 +1,20 @@
 import React from "react";
-import googlePlayImg from "../../assets/image/Google_Play_Store_icon.png";
-import AppStoreImg from "../../assets/image/App_Store_Icon.webp";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
-const DownloadApp = ({ title }) => {
-    const { t } = useTranslation();
-    const { productInfo } = useAuthContext();
+const DownloadApp = ({ productInfo }) => {
+
+    console.log("777", productInfo)
+
+    const t = useTranslations();
+
 
     return (
-        <div className="   md:mt-[0px] lg:mt-[0px] w-full flex flex-col items-center bg-black text-white">
+        <div className="w-full flex flex-col px bg-black text-white">
             <div className="w-width_sm md:w-width_md lg:w-width_lg xl:w-width_xl 2xl:w-width_2xl px-[10px] py-[60px]">
-                {title ? (
+                {productInfo?.data?.text_download_app ? (
                     <>
-                        <div className="" dangerouslySetInnerHTML={{ __html: title }} />
+                        <div className="" dangerouslySetInnerHTML={{ __html: productInfo?.data?.text_download_app }} />
                     </>
                 ) : (
                     <>
@@ -28,20 +31,20 @@ const DownloadApp = ({ title }) => {
                 )}
 
                 <div className="mt-[40px] flex items-center justify-center md:justify-start gap-[30px] ">
-                    {productInfo?.passenger_android_link && (
-                        <Link target="_blank" to={productInfo?.passenger_android_link}>
+                    {productInfo?.data?.passenger_android_link && (
+                        <Link target="_blank" href={productInfo?.data?.passenger_android_link}>
                             <img
-                                src={googlePlayImg}
+                                src="/images/google_play.png"
                                 alt="google-play"
                                 className="h-[40px] w-auto object-contain cursor-pointer"
                             />
                         </Link>
                     )}
 
-                    {productInfo?.passenger_ios_link && (
-                        <Link target="_blank" to={productInfo?.passenger_ios_link}>
+                    {productInfo?.data?.passenger_ios_link && (
+                        <Link target="_blank" href={productInfo?.data?.passenger_ios_link}>
                             <img
-                                src={AppStoreImg}
+                                src="/images/app_store.webp"
                                 alt="app-store"
                                 className="h-[40px] w-auto object-contain cursor-pointer "
                             />
