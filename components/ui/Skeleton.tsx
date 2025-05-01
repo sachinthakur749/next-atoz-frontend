@@ -29,3 +29,35 @@ export const HomeWhyChooseSkeleton = () => {
         </div>
     );
 };
+
+
+export const HomeServiceSkeleton = () => {
+    return (
+        <div className="space-y-3 animate-pulse">
+            <div className="w-full h-[116px] bg-gray-300 rounded-md"></div>
+            <div className="h-5 bg-gray-300 rounded w-3/4"></div>
+            <div className="h-4 bg-gray-300 rounded w-full"></div>
+            <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+            <div className="h-10 bg-gray-300 rounded w-32 mt-3"></div>
+        </div>
+    );
+};
+
+export const HomeFleetSliderSkeleton = () => {
+    return (
+        <div className="relative w-full p-[10px] animate-pulse">
+            <div className="w-full h-[300px] flex flex-col items-center p-[12px] rounded-sm bg-gray-200">
+                <div className="h-[60%] w-full bg-gray-300 rounded"></div>
+                <div className="flex flex-col justify-center h-full w-full">
+                    <div className="w-full flex flex-col items-center">
+                        <div className="mt-[20px] w-[200px] h-6 bg-gray-300 rounded"></div>
+                        <div className="flex justify-center gap-4 mt-2">
+                            <div className="w-[40px] h-5 bg-gray-300 rounded"></div>
+                            <div className="w-[40px] h-5 bg-gray-300 rounded"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};

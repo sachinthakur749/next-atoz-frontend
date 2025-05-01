@@ -5,6 +5,9 @@ import page from "./about/page";
 import HeroSection from "@/components/HeroSection";
 import DownloadApp from "@/components/sections/DownloadApp";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
+import Service from "@/components/sections/Service";
+import PageLayout from "@/components/layout/PageLayout";
+import FleetSection from "@/components/sections/FleetSection";
 
 
 async function getData() {
@@ -14,7 +17,6 @@ async function getData() {
     getRequest("content/site-info"),
   ]);
 
-  console.log(pageData, "pageData");
 
   return { pageData, servicesData, siteInfo };
 }
@@ -30,8 +32,12 @@ export default async function Home() {
     <div>
       <HeroSection bannerImage={pageData?.data?.image_1_link} />
       <DownloadApp productInfo={siteInfo} />
-      <WhyChooseUs imageLink={pageData?.data?.image_2_link}
-        content={pageData?.data?.text_2} />
+      <PageLayout>
+        <WhyChooseUs imageLink={pageData?.data?.image_2_link}
+          content={pageData?.data?.text_2} />
+        <Service data={servicesData} />
+        {/* <FleetSection /> */}
+      </PageLayout>
 
 
     </div>

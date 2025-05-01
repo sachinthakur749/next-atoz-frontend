@@ -1,5 +1,6 @@
 "use server";
 
+import axios from "axios";
 import { cookies } from "next/headers";
 
 export async function getRequest(url: string) {
@@ -40,3 +41,24 @@ export async function getRequest(url: string) {
     throw error;
   }
 }
+
+export const dataFetcher = async (url, options = {}) => {
+  let accessToken = localStorage.getItem("passenger_api_token");
+  const selectedLanguage = localStorage.getItem("locale") || "en";
+  if (!accessToken) {
+    accessToken = `${process.env.NEXT_PUBLIC_API_TOKEN}`;
+  }
+
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/${url}`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        language: selectedLanguage,
+        ...options.headers,
+      },
+      ...options,
+    }
+  );
+  return response.data;
+};

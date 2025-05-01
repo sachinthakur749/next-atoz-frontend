@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 
 const DownloadApp = ({ productInfo }) => {
 
-    console.log("777", productInfo)
 
     const t = useTranslations();
 

@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "ABCFavorit";
-  src: url("/fonts/ABCFavorit-Bold.otf") format("opentype");
-  font-weight: bold;
-  font-style: normal;
+:root {
+  --primary-color: #ec6408;
+}
+
+@theme {
+  --color-primary: var(--primary-color);
 }
 
 @font-face {
   font-family: "ABCFavorit";
-  src: url("/fonts/ABCFavoritMono-Bold.otf") format("opentype");
+  src: url("/fonts/ABCFavorit-Bold.otf") format("opentype");
   font-weight: bold;
   font-style: normal;
 }
@@ -26,11 +27,6 @@
   src: url("/fonts/ABCFavoritMono-BookItalic.otf") format("opentype");
   font-weight: bold;
   font-style: italic;
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
 }
 
 body {

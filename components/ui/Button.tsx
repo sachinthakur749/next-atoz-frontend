@@ -52,7 +52,7 @@ export const NavigateLinks = ({
         <Link
             href={href}
             target={target}
-            className={`h-[52px] bg-primaryOrange  flex justify-center gap-2 items-center text-[18px] py-[8px] text-white rounded-[8px] transition-all 
+            className={` w-max text-primary flex justify-center gap-2 items-center text-[18px] py-[8px]  rounded-[8px] transition-all 
           ${className}`}
         >
             {children}
