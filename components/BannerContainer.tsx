@@ -1,7 +1,13 @@
 import Image from "next/image";
 import React from "react";
 
-const BannerContainer = ({ title, imageSrc }) => {
+interface BannerContainerProps {
+    title: string;
+    imageSrc: string;
+    alt: string;
+}
+
+const BannerContainer = ({ title, imageSrc, alt }: BannerContainerProps) => {
     return (
         <div className="relative fleet-banner md:bg-slate-400 w-full h-[15vh] md:h-[50vh]">
             <div className="w-full h-full absolute hidden md:block top-0 left-0 right-0 bottom-0">

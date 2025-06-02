@@ -10,9 +10,10 @@ import { useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { CmsGlobalType } from "@/types/auth";
 
-const FleetSlider = ({ fleetsListData }) => {
-    const sliderRef = useRef(null);
+const FleetSlider = ({ fleetsListData }: { fleetsListData: CmsGlobalType }) => {
+    const sliderRef = useRef<Slider | null>(null);
     const router = useRouter();
 
     const handleNextSlide = () => {
@@ -56,11 +57,13 @@ const FleetSlider = ({ fleetsListData }) => {
         ],
     };
 
+    console.log("rr", fleetsListData.length)
+
     return (
-        <div className="mt-[30px] relative slider-container w-full overflow-hidden">
+        <div style={{ height: '400px', border: '1px solid red' }} className="mt-[30px] relative slider-container w-full overflow-hidden">
             <Slider ref={sliderRef} {...settings}>
-                {fleetsListData?.data?.length > 0 &&
-                    fleetsListData?.data?.map((item, ind) => (
+                {fleetsListData?.length > 0 &&
+                    fleetsListData?.map((item, ind) => (
                         <div key={ind} className="relative w-full p-[10px]">
                             <div className=" w-full h-[300px] flex flex-col items-center p-[12px] rounded-sm">
                                 <Link

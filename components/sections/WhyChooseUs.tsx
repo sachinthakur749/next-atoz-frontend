@@ -6,7 +6,12 @@ import Link from "next/link";
 import { MdArrowOutward } from "react-icons/md";
 import Image from "next/image";
 
-const WhyChooseUs = ({ imageLink, content }) => {
+interface WhyChooseUsProps {
+  imageLink: string;
+  content: string;
+}
+
+const WhyChooseUs = ({ imageLink, content }: WhyChooseUsProps) => {
   const t = useTranslations();
 
   const isLoading = !imageLink && !content;

@@ -6,8 +6,16 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { NavigateLinks } from "../ui/Button";
 import { HomeServiceSkeleton } from "../ui/Skeleton";
+import { CmsGlobalType } from "@/types/auth";
 
-const ServiceCard = ({ imageUrl, title, desc, slug }) => {
+type ServiceCardProps = {
+    imageUrl?: string;
+    title: string;
+    desc: string;
+    slug: string;
+};
+
+const ServiceCard = ({ imageUrl, title, desc, slug }: ServiceCardProps) => {
     const t = useTranslations();
 
     return (
@@ -44,12 +52,10 @@ const ServiceCard = ({ imageUrl, title, desc, slug }) => {
     );
 };
 
-const Service = ({ data: serviceListData }) => {
+const Service = ({ data }: { data: CmsGlobalType }) => {
     const t = useTranslations();
     const queryClient = useQueryClient();
-    // const serviceListData = queryClient.getQueryData(["services", i18n.language]);
-
-    const isLoading = !serviceListData;
+    const isLoading = !data;
 
     return (
         <div className="bg-white w-full flex justify-center py-[20px] md:py-[70px]">
@@ -62,9 +68,8 @@ const Service = ({ data: serviceListData }) => {
                         ? Array(3)
                             .fill(0)
                             .map((_, index) => <HomeServiceSkeleton key={index} />)
-                        : serviceListData?.data?.length > 0 &&
-                        serviceListData?.data
-                            ?.slice(0, 3)
+                        : data?.length > 0 &&
+                        data?.slice(0, 3)
                             .map((item, ind) => (
                                 <ServiceCard
                                     key={ind}

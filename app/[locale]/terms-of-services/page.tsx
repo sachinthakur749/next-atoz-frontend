@@ -2,15 +2,25 @@
 import BannerContainer from "@/components/BannerContainer";
 import PageLayout from "@/components/layout/PageLayout";
 import { getRequest } from "@/lib/apiServices";
+import { Metadata } from "next";
 
-export async function generateMetadata() {
-
-    const data = await getRequest("content/page?slug=terms-of-services");
+export async function generateMetadata(): Promise<Metadata> {
+    const pageData = await getRequest("content/page?slug=terms-of-services");
 
     return {
-        title: data?.data?.seo_title || "Terms of service",
-        description: data?.data?.seo_description || "Best ride booking platform"
-    }
+        title: pageData?.data?.seo_title || pageData?.data?.title,
+        description: pageData?.data?.seo_description || "Default description",
+        openGraph: {
+            title: pageData?.data?.seo_title || pageData?.data?.title,
+            description: pageData?.data?.seo_description,
+
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: pageData?.data?.seo_title || pageData?.data?.title,
+            description: pageData?.data?.seo_description,
+        },
+    };
 }
 
 const TermsOfServices = async () => {
@@ -24,6 +34,7 @@ const TermsOfServices = async () => {
                 <BannerContainer
                     title={termsData?.data?.title}
                     imageSrc={"/images/terms-of-service.jpg"}
+                    alt="terms-of-services"
                 />
             </div>
             <PageLayout>

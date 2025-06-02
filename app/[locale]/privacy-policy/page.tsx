@@ -1,16 +1,28 @@
 import { getRequest } from "@/lib/apiServices";
 import BannerContainer from "@/components/BannerContainer";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+    const pageData = await getRequest("content/page?slug=privacy-policy");
+
+    return {
+        title: pageData?.data?.seo_title || pageData?.data?.title,
+        description: pageData?.data?.seo_description || "Default description",
+        openGraph: {
+            title: pageData?.data?.seo_title || pageData?.data?.title,
+            description: pageData?.data?.seo_description,
+
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: pageData?.data?.seo_title || pageData?.data?.title,
+            description: pageData?.data?.seo_description,
+        },
+    };
+}
 
 const PrivacyPolicy = async () => {
-
-    // const { data: privacyData, isLoading } = useQuery({
-    //     queryKey: ["privacy-page"],
-    //     queryFn: () => dataFetcher("content/page?slug=privacy-policy"),
-    // });
-
     const privacyData = await getRequest("content/page?slug=privacy-policy");
-
-
 
     return (
         <>
@@ -18,7 +30,8 @@ const PrivacyPolicy = async () => {
             <div className=" relative fleet-banner md:bg-slate-400 w-full h-[10vh] md:h-[50vh]  ">
                 <BannerContainer
                     title={privacyData?.data?.title}
-                    imageSrc={"/privacy-policy.jpg"}
+                    imageSrc={"/images/privacy-policy.jpg"}
+                    alt="terms-of-services"
                 />
             </div>
 
