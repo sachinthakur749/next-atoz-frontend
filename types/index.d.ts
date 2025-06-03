@@ -44,3 +44,11 @@ interface SiteInfoType {
   schema_script_org: string;
   google_site_verification_code: string;
 }
+
+type StepStatus = "current" | "complete" | "upcoming";
+
+type Step = {
+  id: string | number;
+  title: string;
+  status: StepStatus;
+};

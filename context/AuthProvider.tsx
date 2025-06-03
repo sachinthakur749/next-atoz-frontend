@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setUser(JSON.parse(storedUser))
             setIsAuthenticated(true)
         } else {
-            setUser(null)
+            // setUser(null)
             setIsAuthenticated(false)
         }
 
@@ -56,21 +56,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         getProductInfo()
     }, [])
 
-    const value = {
+    const value: AuthContextType = {
         isAuthenticated,
         authToken,
-        user,
         productInfo,
-        firebaseReferenceID,
         passengerIdentity,
-        driverIdentity,
-        setDriverIdentity,
         setPassengerIdentity,
-        setFirebaseReferenceID,
+        setProductInfo,
         setIsAuthenticated,
         setAuthToken,
-        setUser,
-        bookingUser,
     };
 
     return (
@@ -84,4 +78,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     );
 };
 
-export const useAuthContext = () => useContext(AuthContext);
+export const useAuthContext = () => {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error("useAuthContext must be used within an AuthProvider");
+    }
+    return context;
+};

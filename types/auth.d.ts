@@ -11,6 +11,16 @@ type AuthContextType = {
   setProductInfo: (info: any) => void;
 };
 
+export type StepperContextType = {
+  currentStep: number;
+  bookingData: any;
+  nextStep: () => void;
+  prevStep: () => void;
+  goToStep: (step: number) => void;
+  setBookingData: (data: any) => void;
+  steps: string[];
+};
+
 type AuthProviderProps = {
   children: ReactNode;
 };

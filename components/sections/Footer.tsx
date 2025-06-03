@@ -90,7 +90,7 @@ const Footer = ({ serviceLists, locationLists, fleetLists, siteInfo }: FooterPro
               Fleet
             </h2>
             {fleetLists.map((item, ind) => (
-              <Link key={ind} href={`/fleets`}>
+              <Link key={ind} href={`/fleet`}>
                 <p className="text-[#97999e] hover:text-white hover:underline text-[14px] mb-[8px]">
                   {item?.title}
                 </p>
@@ -116,7 +116,7 @@ const Footer = ({ serviceLists, locationLists, fleetLists, siteInfo }: FooterPro
               Services
             </h2>
             {serviceLists?.map((item, ind) => (
-              <Link key={ind} href={`/our-services`}>
+              <Link key={ind} href={`/our-service/${item?.slug}`}>
                 <p className="text-[#97999e] hover:text-white hover:underline text-[14px] mb-[8px]">
                   {item.title}
                 </p>

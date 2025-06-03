@@ -8,6 +8,9 @@ import { QueryClientProvider } from "@/context/QueryClientProvider";
 import { EnvCssVariables } from "@/lib/EnvCssVariables";
 import { getRequest } from "@/lib/apiServices";
 import Footer from "@/components/sections/Footer";
+import Navbar from "@/components/sections/Navbar";
+import { AuthProvider } from "@/context/AuthProvider";
+import { StepperProvider } from "@/context/StepperContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,13 +69,24 @@ export default async function RootLayout({
       </head>
       <body suppressHydrationWarning>
         <NextIntlClientProvider locale={locale}>
-          <QueryClientProvider>{children}
-            <Footer
-              serviceLists={servicesData?.data}
-              locationLists={locationsData?.data}
-              fleetLists={fleetsData?.data}
-              siteInfo={siteInfo?.data}
-            />
+          <QueryClientProvider>
+            <AuthProvider>
+              <StepperProvider>
+                <Navbar
+                  serviceLists={servicesData?.data}
+                  locationLists={locationsData?.data}
+                  fleetLists={fleetsData?.data}
+                  siteInfo={siteInfo?.data}
+                />
+                {children}
+                <Footer
+                  serviceLists={servicesData?.data}
+                  locationLists={locationsData?.data}
+                  fleetLists={fleetsData?.data}
+                  siteInfo={siteInfo?.data}
+                />
+              </StepperProvider>
+            </AuthProvider>
           </QueryClientProvider>
         </NextIntlClientProvider>
         <EnvCssVariables />
