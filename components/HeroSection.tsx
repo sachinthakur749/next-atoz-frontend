@@ -1,16 +1,16 @@
 import Image from 'next/image'
 import React from 'react'
+import QuoteCards from './sections/QuoteCards';
 
-const HeroSection = ({ bannerImage }) => {
+interface HeroSectionProps {
+    bannerImage: string;
+}
+
+const HeroSection = ({ bannerImage }: HeroSectionProps) => {
     return (
-        <div className="relative w-full h-max flex flex-col items-center">
-            <div className="relative w-full bg-slate-400">
-                <div className="w-full flex justify-center bg-white">
-                    <h2 className="w-width_sm md:w-width_md lg:w-width_lg py-3 xl:w-width_xl p-3 2xl:w-width_2xl text-[28px] font-[400]">
-                        a complete section
-                    </h2>
-                </div>
-            </div>
+        <div className="relative  w-full h-max flex flex-col items-center">
+
+
             <div className="w-full h-[20vh] md:h-[70vh]">
                 {bannerImage ? (
                     <>
@@ -29,12 +29,14 @@ const HeroSection = ({ bannerImage }) => {
                     </>
                 )}
             </div>
-            <div className="block md:hidden w-full">
-                {/* <QuoteCard /> */}
+
+
+            <div className="block z-[20] md:hidden w-full">
+                <QuoteCards />
             </div>
 
-            <div className="z-[20] w-[450px] absolute top-[350px] md:top-[100px] lg:top-[30px] right-0 -translate-x-[20%] md:flex hidden justify-end ">
-                {/* <QuoteCard /> */}
+            <div className="z-[20] w-[450px] absolute top-[350px] md:top-[100px] lg:top-[-30px] right-0 -translate-x-[20%] md:flex hidden justify-end ">
+                <QuoteCards />
             </div>
         </div>
     )

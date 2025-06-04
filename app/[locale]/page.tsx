@@ -1,12 +1,10 @@
 import { getRequest } from "@/lib/apiServices";
-import { useTranslations } from "next-intl";
-import Image from "next/image";
 import HeroSection from "@/components/HeroSection";
 import DownloadApp from "@/components/sections/DownloadApp";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import Service from "@/components/sections/Service";
 import PageLayout from "@/components/layout/PageLayout";
-import FleetSection from "@/components/sections/FleetSection";
+import SubNavbar from "@/components/sections/SubNavbar";
 
 
 async function getData() {
@@ -26,6 +24,7 @@ export default async function Home() {
 
   return (
     <div>
+      <SubNavbar />
       <HeroSection bannerImage={pageData?.data?.image_1_link} />
       <DownloadApp productInfo={siteInfo?.data} />
       <PageLayout>
@@ -35,8 +34,6 @@ export default async function Home() {
         <Service data={servicesData?.data} />
         {/* <FleetSection /> */}
       </PageLayout>
-
-
     </div>
   );
 }

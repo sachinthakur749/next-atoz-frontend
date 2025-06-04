@@ -15,6 +15,7 @@ import { RxCross2 } from 'react-icons/rx';
 import Navitems from './Navitems';
 import Stepper from './Stepper';
 import { useStepper } from '@/context/StepperContext';
+import LanguageSwitcher from '../LanguageSwitcher';
 
 interface NavbarProps {
     serviceLists: ServiceItem[];
@@ -46,8 +47,8 @@ const Navbar = ({ serviceLists, locationLists, fleetLists, siteInfo }: NavbarPro
         router.push("/profile/passenger");
     }, [router]);
 
-    const steps = useMemo(() => {
-        const STEPS = [
+    const steps: Step[] = useMemo(() => {
+        const STEPS: Step[] = [
             { id: 1, title: `${t("vehicle_selection")}`, status: "current" },
             { id: 2, title: `${t("passenger_details")}`, status: "upcoming" },
             { id: 3, title: `${t("payment")}`, status: "upcoming" },
@@ -80,15 +81,9 @@ const Navbar = ({ serviceLists, locationLists, fleetLists, siteInfo }: NavbarPro
         }
     }, [passengerIdentity]);
 
-    console.log(siteInfo.logo_url)
-
-
-
-
-
     return (
         <>
-            <div className="w-full p-[10px] flex border border-[#e2e2e2] justify-center shadow-md">
+            <div className="z-[200] sticky top-0 px-4 md:px-20 bg-white/85 backdrop-blur-lg w-full p-[10px] flex border border-[#e2e2e2] justify-center shadow-md">
                 <div className="w-full flex items-center justify-between">
                     <div
                         onClick={() => router.push("/")}

@@ -5,8 +5,8 @@ import { useTranslations } from "next-intl";
 const DownloadApp = ({ productInfo }: { productInfo: SiteInfoType }) => {
     const t = useTranslations();
     return (
-        <div className="w-full flex flex-col px bg-black text-white">
-            <div className="w-width_sm md:w-width_md lg:w-width_lg xl:w-width_xl 2xl:w-width_2xl px-[10px] py-[60px]">
+        <div className="w-full px-4 md:px-20 flex flex-col px bg-black text-white">
+            <div className=" px-[10px] py-[60px]">
                 {productInfo?.text_download_app ? (
                     <>
                         <div className="" dangerouslySetInnerHTML={{ __html: productInfo?.text_download_app }} />

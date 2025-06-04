@@ -17,7 +17,7 @@ export default function Stepper({ steps }: StepperProps) {
                         className="h-full bg-primaryOrange transition-all duration-300"
                         style={{
                             width: `${(steps.filter((step) => step.status === "complete").length /
-                                    (steps.length - 1)) *
+                                (steps.length - 1)) *
                                 100
                                 }%`,
                         }}
@@ -32,28 +32,28 @@ export default function Stepper({ steps }: StepperProps) {
                     >
                         <span
                             className={`${step.status === "current"
-                                    ? "text-primary"
-                                    : step.status === "complete"
-                                        ? "text-foreground"
-                                        : "text-gray-400"
+                                ? "text-primary"
+                                : step.status === "complete"
+                                    ? "text-foreground"
+                                    : "text-gray-400"
                                 } text-center text-nowrap text-sm font-medium`}
                         >
                             {step.title}
                         </span>
                         <div
                             className={`${step.status === "current"
-                                    ? "border-primaryOrange bg-white"
-                                    : step.status === "complete"
-                                        ? "border-primaryOrange bg-primaryOrange"
-                                        : "border-gray-300 bg-white"
+                                ? "border-primaryOrange bg-white"
+                                : step.status === "complete"
+                                    ? "border-primaryOrange bg-primaryOrange"
+                                    : "border-gray-300 bg-white"
                                 } relative z-10 flex h-[20px] w-[20px] items-center justify-center rounded-full border-2 transition-colors`}
                         >
                             <span
                                 className={`${step.status === "current"
-                                        ? "bg-primary"
-                                        : step.status === "upcoming"
-                                            ? "bg-gray-300"
-                                            : ""
+                                    ? "bg-primary"
+                                    : step.status === "upcoming"
+                                        ? "bg-gray-300"
+                                        : ""
                                     } h-2 w-2 rounded-full`}
                             />
                         </div>

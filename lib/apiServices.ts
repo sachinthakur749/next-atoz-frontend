@@ -42,23 +42,68 @@ export async function getRequest(url: string) {
   }
 }
 
-export const dataFetcher = async (url, options = {}) => {
-  let accessToken = localStorage.getItem("passenger_api_token");
-  const selectedLanguage = localStorage.getItem("locale") || "en";
+export async function postRequest(url: string, data: Record<string, any>) {
+  const cookieStore = cookies();
+  let accessToken = (await cookieStore).get("api_token")?.value;
+
   if (!accessToken) {
-    accessToken = `${process.env.NEXT_PUBLIC_API_TOKEN}`;
+    accessToken = process.env.NEXT_PUBLIC_API_TOKEN;
   }
 
-  const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/${url}`,
-    {
+  if (!accessToken) {
+    throw new Error("No access token available");
+  }
+  const apiEndpoint = process.env.NEXT_PUBLIC_API_ENDPOINT;
+
+  if (!apiEndpoint) {
+    throw new Error("API_ENDPOINT is not defined in environment variables");
+  }
+
+  const formData = new FormData();
+  Object.entries(data).forEach(([key, value]) => {
+    if (key === "via") {
+      const viaArray = Array.isArray(data[key]) ? data[key] : [data[key]];
+      viaArray.forEach((item, index) => {
+        for (const nestedKey in item) {
+          formData.append(`${key}[${index}][${nestedKey}]`, item[nestedKey]);
+        }
+      });
+    } else if (typeof data[key] === "object" && data[key] !== null) {
+      for (const nestedKey in data[key]) {
+        formData.append(`${key}[${nestedKey}]`, data[key][nestedKey]);
+      }
+    } else {
+      formData.append(key, value);
+    }
+  });
+
+  try {
+    const response = await fetch(`${apiEndpoint}/${url}`, {
+      method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        language: selectedLanguage,
-        ...options.headers,
       },
-      ...options,
+      body: formData,
+      next: { revalidate: 60 },
+    });
+
+    const data = await response.json();
+    console.log(data);
+    if (!response.ok) {
+      console.log(data);
+      return {
+        status: 422,
+        response: {
+          ...data,
+          code: data?.data?.code || "",
+          no_rate: data?.data?.no_rate || "",
+        },
+      };
     }
-  );
-  return response.data;
-};
+
+    return { status: 200, response: data };
+  } catch (error) {
+    console.error("Error in multipart POST request:", error);
+    throw error;
+  }
+}

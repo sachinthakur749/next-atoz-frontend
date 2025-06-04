@@ -1,25 +1,32 @@
+"use client";
+
 import { Link, useRouter } from "@/i18n/navigation";
+import { ServiceItem } from "@/types/auth";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+interface NavItemsProps {
+    locationLists: ServiceItem[];
+    serviceLists: ServiceItem[];
+
+}
 
 
-const NavItems = ({ locationLists, serviceLists }) => {
+const NavItems = ({ locationLists, serviceLists }: NavItemsProps) => {
     const router = useRouter();
     const t = useTranslations();
+    const [activeMenu, setActiveMenu] = useState<string | React.SetStateAction<null>>(null);
+    const [isPortmingo, setIsPortmingo] = useState(false);
 
-    const [activeMenu, setActiveMenu] = useState(null);
 
-    const hostname = window.location.hostname;
-    const isPortmingo = hostname.endsWith("portmingo.com");
-
-    const handleMouseEnter = (menu) => setActiveMenu(menu);
+    const handleMouseEnter = (menu: string | React.SetStateAction<null>) => setActiveMenu(menu);
     const handleMouseLeave = () => setActiveMenu(null);
 
     const commonClasses = "text-[17px] tracking-wide font-semibold text-[#000]";
     const dropdownClass =
         "z-10 absolute w-[200px] top-[25px] bg-white overflow-hidden rounded-md min-w-[180px] max-h-[300px] overflow-y-auto shadow-lg";
 
-    const renderDropdown = (items, pathPrefix) => (
+    const renderDropdown = (items: ServiceItem[], pathPrefix: string) => (
         <div className={dropdownClass}>
             {items?.map((item, idx) => (
                 <p
@@ -32,6 +39,11 @@ const NavItems = ({ locationLists, serviceLists }) => {
             ))}
         </div>
     );
+
+    useEffect(() => {
+        const hostname = window.location.hostname;
+        setIsPortmingo(hostname.endsWith("portmingo.com"));
+    }, []);
 
     return (
         <div className="flex mr-[-20px] navs items-center gap-10">

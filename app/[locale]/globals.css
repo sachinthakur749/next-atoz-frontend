@@ -6,6 +6,7 @@
 
 @theme {
   --color-primary: var(--primary-color);
+  --color-smoke: #f0f2f7;
 }
 
 @font-face {

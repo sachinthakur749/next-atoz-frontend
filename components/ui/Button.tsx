@@ -25,8 +25,8 @@ export const Button = ({
             onClick={onClick}
             className={`h-[52px]  flex justify-center gap-2 items-center text-[18px] py-[8px] text-white rounded-[8px] transition-all 
           ${loading || disabled
-                    ? "bg-primaryOrange opacity-50"
-                    : "bg-primaryOrange hover:opacity-80"
+                    ? "bg-primary opacity-50"
+                    : "bg-primary hover:opacity-80"
                 } 
           ${className}`}
         >

@@ -48,7 +48,7 @@ interface SiteInfoType {
 type StepStatus = "current" | "complete" | "upcoming";
 
 type Step = {
-  id: string | number;
+  id: number;
   title: string;
   status: StepStatus;
 };
