@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import React, { ReactNode, useState } from "react";
+import { Controller, RegisterOptions, useForm } from "react-hook-form";
 import { MdEmail, MdSubject } from "react-icons/md";
 import { RiMessage3Fill } from "react-icons/ri";
 import { GoPersonFill } from "react-icons/go";
@@ -7,10 +7,29 @@ import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { postRequest } from "@/lib/apiServices";
 import { Button } from "./ui/Button";
+import ReCAPTCHA from "react-google-recaptcha";
+import { toast } from "sonner";
+
+interface ContactFormDataTypes {
+    name: string;
+    email: string;
+    comment: string;
+    subject: string;
+    google_captcha_token: string;
+}
+
+type ContactFormField = {
+    name: keyof ContactFormDataTypes;
+    icon: ReactNode;
+    label: string;
+    placeholder: string;
+    rules?: RegisterOptions<ContactFormDataTypes, keyof ContactFormDataTypes>;
+    type: "text" | "textarea";
+};
 
 const ContactForm = () => {
     const t = useTranslations();
-    const defaultValues = {
+    const defaultValues: ContactFormDataTypes = {
         name: "",
         email: "",
         comment: "",
@@ -18,52 +37,47 @@ const ContactForm = () => {
         google_captcha_token: "",
     };
 
-    const [captchaToken, setCaptchaToken] = useState(null);
+    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
     const {
         handleSubmit,
         control,
         formState: { errors },
         reset,
-    } = useForm({ defaultValues, mode: "onBlur" });
+    } = useForm<ContactFormDataTypes>({ defaultValues, mode: "onBlur" });
 
-    const handleCaptchaChange = (token) => {
+    const handleCaptchaChange = (token: string | null) => {
         setCaptchaToken(token);
     };
 
     const { isPending, mutate } = useMutation({
-        mutationFn: async (data) => {
-            return postRequest("contact-us", data);
+        mutationFn: async (data: Record<string, any>) => {
+            return postRequest("contact-uss", data);
         },
         onSuccess: (data) => {
-            ShowToast({
-                type: "success",
-                placement: "topRight",
-                message: data?.message,
-                description: null,
-                duration: null,
-            });
+            toast.success(data.response.title, {
+                description: data.response.message,
+            })
             reset();
         },
         onError: (data) => {
-            ShowToast({
-                type: "error",
-                placement: "topRight",
-                message: data?.response?.data?.message,
-                description: null,
-                duration: null,
-            });
+            console.log(data)
+            toast.error(data.message || "An error occurred",)
+            // toast.success(data.response.title, {
+            //     description: data.response.message,
+            // })
+            // ShowToast({
+            //     type: "error",
+            //     placement: "topRight",
+            //     message: data?.response?.data?.message,
+            //     description: null,
+            //     duration: null,
+            // });
         },
     });
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data: ContactFormDataTypes) => {
         if (!captchaToken) {
-            ShowToast({
-                type: "error",
-                placement: "topRight",
-                message: t("please_complete_captcha"),
-                description: null,
-                duration: null,
-            });
+            toast.error(t("please_complete_captcha"))
             return;
         }
         const payload = {
@@ -73,7 +87,7 @@ const ContactForm = () => {
         mutate(payload);
     };
 
-    const formFields = [
+    const formFields: ContactFormField[] = [
         {
             name: "name",
             icon: <GoPersonFill size={25} className="text-[18px] text-[#64666b]" />,
@@ -136,8 +150,8 @@ const ContactForm = () => {
                         <div key={field.name}>
                             <div
                                 className={`w-full ${errors[field.name]
-                                        ? "border-[1px] border-red-500"
-                                        : "border-[1px] border-gray-300"
+                                    ? "border-[1px] border-red-500"
+                                    : "border-[1px] border-gray-300"
                                     } bg-smoke flex items-start gap-3 px-[10px] py-[5px] rounded-[4px]`}
                             >
                                 <div>{field.icon}</div>
@@ -179,7 +193,7 @@ const ContactForm = () => {
 
                     <div>
                         <ReCAPTCHA
-                            sitekey={import.meta.env.VITE_GOOGLE_CAPTCHA}
+                            sitekey={process.env.NEXT_PUBLIC_GOOGLE_CAPTCHA ?? ""}
                             onChange={handleCaptchaChange}
                         />
                     </div>

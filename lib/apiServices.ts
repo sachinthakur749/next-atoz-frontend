@@ -88,9 +88,8 @@ export async function postRequest(url: string, data: Record<string, any>) {
     });
 
     const data = await response.json();
-    console.log(data);
     if (!response.ok) {
-      console.log(data);
+      console.log("eee", data);
       return {
         status: 422,
         response: {
@@ -101,9 +100,10 @@ export async function postRequest(url: string, data: Record<string, any>) {
       };
     }
 
-    return { status: 200, response: data };
+    return { status: response.status, response: data };
   } catch (error) {
     console.error("Error in multipart POST request:", error);
+
     throw error;
   }
 }

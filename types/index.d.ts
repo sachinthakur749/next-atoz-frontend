@@ -52,3 +52,54 @@ type Step = {
   title: string;
   status: StepStatus;
 };
+
+export interface Card {
+  image_link: string;
+  [key: string]: any;
+}
+
+export interface CarSeat {
+  name: string;
+  key_name: string;
+  [key: string]: any; // Add more properties if needed
+}
+
+export interface Fleet {
+  class_name: string;
+  type_name: string;
+  image_link: string;
+  fare: string; // e.g., "$169.80", use `number` if it's a parsed value
+  fleet_id: number;
+  passenger: number;
+  luggage: number;
+  baby_seat: number;
+  car_seats: CarSeat[];
+}
+
+export interface PolylinePoints {
+  [key: string]: any;
+}
+
+export interface QuoteDetails {
+  card: Card;
+  distance: string;
+  duration: string;
+  fleets: Fleet[];
+  from_lat: number;
+  from_lng: number;
+  from_location: string;
+  is_airport: number;
+  journey_type: "one_way" | "return";
+  passenger: number;
+  pickup_date: string;
+  pickup_time: string;
+  polyline_points: PolylinePoints;
+  quote_id: string;
+  return_date: string;
+  return_time: string;
+  service_type: string;
+  to_lat: number;
+  to_lng: number;
+  to_location: string;
+  via: any[];
+}

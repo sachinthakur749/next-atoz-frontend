@@ -1,5 +1,6 @@
 "use client";
 
+import ContactForm from '@/components/ContactForm';
 import { useAuthContext } from '@/context/AuthProvider';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -88,7 +89,7 @@ const page = () => {
                     </div>
                 </div>
                 <div className="w-[100%] md:w-[50%] ">
-                    {/* <ContactForm /> */}
+                    <ContactForm />
                 </div>
             </div>
         </div>

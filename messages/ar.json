@@ -179,6 +179,8 @@
     "register_to_get_started": "سجل للبدء",
     "register_tagline": "انضم إلى {{ProductName}} للحصول على خدمات نقل سلسة وسرية ودقيقة.",
     "no_of_passenger": "عدد الركاب",
-    "no_of_luggage": "عدد الأمتعة"
+    "no_of_luggage": "عدد الأمتعة",
+    "book_now": "احجز الآن",
+    "book_later": "احجز لاحقًا"
 
   }

@@ -182,8 +182,9 @@
   "register_to_get_started": "Register to get started",
   "register_tagline" : "Join {{ProductName}} for seamless, discrete, and punctual transportation services.",
   "no_of_passenger" : "No. of Passenger",
-  "no_of_luggage": "No. of Luggage"
+  "no_of_luggage": "No. of Luggage",
+  "book_now": "Book Now",
+  "book_later": "Book Later"
   
-  
-  }
+}
   

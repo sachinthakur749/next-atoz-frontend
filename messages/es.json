@@ -182,5 +182,7 @@
     "register_to_get_started": "Regístrate para comenzar",
     "register_tagline": "Únete a {{ProductName}} para servicios de transporte sin complicaciones, discretos y puntuales.",
     "no_of_passenger": "N.º de pasajeros",
-      "no_of_luggage": "N.º de equipajes"
+    "no_of_luggage": "N.º de equipajes",
+    "book_now": "Reservar ahora",
+    "book_later": "Reservar más tarde"
   }

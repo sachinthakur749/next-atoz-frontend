@@ -179,5 +179,7 @@
     "register_to_get_started": "Registrieren Sie sich, um zu beginnen",
     "register_tagline": "Treten Sie {{ProductName}} bei für nahtlose, diskrete und pünktliche Transportdienstleistungen.",
     "no_of_passenger": "Anzahl der Passagiere",
-    "no_of_luggage": "Anzahl der Gepäckstücke"
+    "no_of_luggage": "Anzahl der Gepäckstücke",
+    "book_now": "Jetzt buchen",
+    "book_later": "Später buchen"
   }

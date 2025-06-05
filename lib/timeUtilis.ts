@@ -68,3 +68,13 @@ export function addBookingTimeToBase(
 
   return `${finalHours}:${finalMinutes}:${finalSeconds}`;
 }
+
+export const DateTimeFormatter = (date: string, time: string) => {
+  const combinedDateTime = `${date} ${time}`;
+
+  const formattedDateTime = moment(combinedDateTime, "DD/MM/YYYY hh:mm A")
+    .utc()
+    .format("ddd, MMM DD, YYYY [at] hh:mm A [(GMT)]");
+
+  return combinedDateTime;
+};

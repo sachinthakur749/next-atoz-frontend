@@ -11,6 +11,9 @@ import Footer from "@/components/sections/Footer";
 import Navbar from "@/components/sections/Navbar";
 import { AuthProvider } from "@/context/AuthProvider";
 import { StepperProvider } from "@/context/StepperContext";
+import Head from "next/head";
+import { Toaster } from 'sonner';
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,7 +58,8 @@ export default async function RootLayout({
   const primaryColor = process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#EC6408";
 
   const { locationsData, servicesData, fleetsData, siteInfo } = await getData();
-
+  const faviconUrl = siteInfo?.data?.favicon_url;
+  console.log(siteInfo?.data?.name)
 
 
 
@@ -64,9 +68,12 @@ export default async function RootLayout({
   }
   return (
     <html lang={locale}>
-      <head>
+      <Head>
+        <link rel="icon" href={faviconUrl} />
+        <meta property="og:title" content={siteInfo?.data?.name} />
+
         <style>{`:root { --primary-color: ${primaryColor}; }`}</style>
-      </head>
+      </Head>
       <body suppressHydrationWarning>
         <NextIntlClientProvider locale={locale}>
           <QueryClientProvider>
@@ -79,6 +86,7 @@ export default async function RootLayout({
                   siteInfo={siteInfo?.data}
                 />
                 {children}
+                <Toaster position="top-right" richColors />
                 <Footer
                   serviceLists={servicesData?.data}
                   locationLists={locationsData?.data}

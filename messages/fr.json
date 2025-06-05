@@ -179,6 +179,8 @@
     "register_to_get_started": "Inscrivez-vous pour commencer",
     "register_tagline": "Rejoignez {{ProductName}} pour des services de transport fluides, discrets et ponctuels.",
     "no_of_passenger": "Nbre de passagers",
-    "no_of_luggage": "Nbre de bagages"
+    "no_of_luggage": "Nbre de bagages",
+    "book_now": "Réserver maintenant",
+    "book_later": "Réserver plus tard"
 
   }
