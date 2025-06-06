@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useStepper } from "../../context/StepperContext";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { TiTick } from "react-icons/ti";
 import FleetCard from "../FleetCard";
 import { useTranslations } from "next-intl";
 import BookingFormLayout from "../layout/BookFormLayout";
@@ -50,17 +49,9 @@ const FooterButtons = ({ onContinue }: { onContinue: () => void }) => {
     return (
         <div className="w-full  mt-2 bg-white sticky bottom-0 py-4 flex justify-between px-4 rounded-[12px] bg-gradient-to-t from-white to-transparent">
             <div className=" w-[710px] mx-auto flex flex-col md:flex-row gap-5 justify-center">
-                {/* <button
-          onClick={() =>
-            window.open("/terms-of-services", "_blank", "noopener,noreferrer")
-          }
-          className="w-full md:w-1/2 border tracking-wider uppercase py-[15px] px-[32px] border-gray-400  rounded text-gray-700"
-        >
-          {t("terms_conditions")}
-        </button> */}
                 <button
                     onClick={onContinue}
-                    className="w-full md:w-1/2 bg-primaryOrange font-normal tracking-wider uppercase py-[15px] px-[32px]  text-white rounded"
+                    className="w-full md:w-1/2 bg-primary font-normal tracking-wider uppercase py-[15px] px-[32px]  text-white rounded"
                 >
                     {t("continue")}
                 </button>

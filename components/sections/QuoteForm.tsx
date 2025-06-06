@@ -11,13 +11,13 @@ import moment from "moment";
 import { useTranslations } from "next-intl";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { useStepper } from "@/context/StepperContext";
-import { postRequest } from "@/lib/apiServices";
 import { useAuthContext } from "@/context/AuthProvider";
 import { addBookingTimeToBase, calculateMinMaxTimes, convertMinutesToHours, getLocalTime, getTimeZone, normalizeDate } from "@/lib/timeUtilis";
 import useCustomNavigate from "@/hooks/useCustomNavigate";
 import { Button } from "../ui/Button";
 import { FaPeopleGroup } from "react-icons/fa6";
 import AutoCompleteInput from "../ui/AutoCompleteInput";
+import { postRequest } from "@/lib/postRequest";
 
 
 // Type definitions
@@ -195,7 +195,6 @@ const QuoteForm: React.FC<TransferOnlyProps> = ({
         setViaPoints(updatedViaPoints);
     };
 
-    // Calculate disabled times for time picker
     const getDisabledTimes = (isReturnPicker = false) => {
         const { hour, minute } = isReturnPicker ? minReturnTime : minTime;
 
@@ -210,30 +209,26 @@ const QuoteForm: React.FC<TransferOnlyProps> = ({
         };
     };
 
+    console.log("rrr", formData)
+
     // Handle form submission
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError({ title: null, message: null });
         setLoading(true);
 
-        const formDataToSend = new FormData();
-        formDataToSend.append("is_now", activeTab === "now" ? "true" : "false");
 
-        // Append all form data to FormData object
-        Object.entries(formData).forEach(([key, value]) => {
-            if (value !== null && value !== undefined) {
-                formDataToSend.append(key, value.toString());
-            }
-        });
 
         try {
-            const response = await postRequest("quote", formDataToSend);
+            const response = await postRequest("quote", formData);
             setLoading(false);
+
+            console.log(response);
 
             // Store quote data
             if (typeof window !== "undefined") {
-                localStorage.setItem("quote", JSON.stringify(response?.data));
-                localStorage.setItem("quote_id", response?.data?.quote_id);
+                localStorage.setItem("quote", JSON.stringify(response?.response?.data));
+                localStorage.setItem("quote_id", response?.response?.data?.quote_id);
             }
 
             goToStep(1);

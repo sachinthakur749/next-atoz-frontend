@@ -14,7 +14,7 @@ export default function Stepper({ steps }: StepperProps) {
                     }}
                 >
                     <div
-                        className="h-full bg-primaryOrange transition-all duration-300"
+                        className="h-full bg-primary transition-all duration-300"
                         style={{
                             width: `${(steps.filter((step) => step.status === "complete").length /
                                 (steps.length - 1)) *
@@ -42,9 +42,9 @@ export default function Stepper({ steps }: StepperProps) {
                         </span>
                         <div
                             className={`${step.status === "current"
-                                ? "border-primaryOrange bg-white"
+                                ? "border-primary bg-white"
                                 : step.status === "complete"
-                                    ? "border-primaryOrange bg-primaryOrange"
+                                    ? "border-primary bg-primary"
                                     : "border-gray-300 bg-white"
                                 } relative z-10 flex h-[20px] w-[20px] items-center justify-center rounded-full border-2 transition-colors`}
                         >

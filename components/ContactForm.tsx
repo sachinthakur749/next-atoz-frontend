@@ -5,10 +5,10 @@ import { RiMessage3Fill } from "react-icons/ri";
 import { GoPersonFill } from "react-icons/go";
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
-import { postRequest } from "@/lib/apiServices";
 import { Button } from "./ui/Button";
 import ReCAPTCHA from "react-google-recaptcha";
 import { toast } from "sonner";
+import { postRequest } from "@/lib/postRequest";
 
 interface ContactFormDataTypes {
     name: string;
@@ -51,7 +51,7 @@ const ContactForm = () => {
 
     const { isPending, mutate } = useMutation({
         mutationFn: async (data: Record<string, any>) => {
-            return postRequest("contact-uss", data);
+            return postRequest("contact-us", data);
         },
         onSuccess: (data) => {
             toast.success(data.response.title, {

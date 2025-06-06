@@ -1,5 +1,6 @@
 "use client";
 
+import LoginModal from '@/components/modal/LoginModal';
 import SelectVehicle from '@/components/sections/SelectionVehicle';
 import { useStepper } from '@/context/StepperContext';
 import React, { useEffect, useState } from 'react'
@@ -41,10 +42,10 @@ const page = () => {
           />
         )} */}
             </div>
-            {/* <LoginModal
-        open={isLoginModalOpen}
-        handleClose={() => setIsLoginModalOpen(false)}
-      /> */}
+            <LoginModal
+                open={isLoginModalOpen}
+                handleClose={() => setIsLoginModalOpen(false)}
+            />
         </div>
     );
 }
